@@ -1,0 +1,15 @@
+system:
+  docker: true
+  use_setup_phase: service
+  service_container_spec:
+    - docker: true
+
+hooks:
+  pre_setup: |
+    set -e
+    git clone git@github.com:docker-library/hello-world.git hello-world
+    cd hello-world
+    sudo docker build -t hello-world .
+
+tests:
+  - sudo docker ps
